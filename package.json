@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "relocate": "[ ! -d 'node_modules' ] || (rm -rf ../node_modules && mv -f node_modules ../)",
     "relocate_windows": "(if exist node_modules/ (cd ../ && remove-node-modules && move jwt_console_project/node_modules ./))",
-    "start": "node index.js"
+    "start": "pm2 start index.js"
   },
   "author": "DocuSign, Inc",
   "license": "ISC",
@@ -21,6 +21,7 @@
     "koa-bodyparser": "^4.4.0",
     "koa-router": "^12.0.0",
     "path": "^0.12.7",
+    "pm2": "^5.3.0",
     "prompt-sync": "^4.2.0",
     "remove-node-modules": "^1.7.6"
   }
