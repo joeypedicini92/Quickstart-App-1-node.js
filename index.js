@@ -34,13 +34,35 @@ router.post('/submit', async (ctx) => {
   let envelopeId = await signingViaEmail.sendEnvelope(args);
   console.log(envelopeId);
 
+  // Delete the file after processing
+  fs.unlink(file.path, (err) => {
+    if (err) {
+      console.error('Error deleting the file:', err);
+    } else {
+      console.log('File deleted successfully');
+    }
+  });
+
   // Respond with a success message
   ctx.body = { message: envelopeId };
 });
 
+const apiKey = process.env.apiKey || 'test';
+
+const apiKeyMiddleware = async (ctx, next) => {
+  const providedApiKey = ctx.get('x-api-key');
+  if (providedApiKey === apiKey) {
+    await next();
+  } else {
+    ctx.status = 401;
+    ctx.body = 'Unauthorized: Invalid API key';
+  }
+};
+
 // Start the server
 app.use(router.routes())
-.use(router.allowedMethods());
+.use(router.allowedMethods())
+.use(apiKeyMiddleware);
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
