@@ -59,10 +59,12 @@ const apiKeyMiddleware = async (ctx, next) => {
   }
 };
 
+// Use the middleware in your application
+app.use(apiKeyMiddleware);
+
 // Start the server
 app.use(router.routes())
-.use(router.allowedMethods())
-.use(apiKeyMiddleware);
+.use(router.allowedMethods());
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
