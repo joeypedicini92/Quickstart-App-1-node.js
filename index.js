@@ -6,6 +6,8 @@ const path = require('path');
 const { authenticate, getArgs } = require('./jwt_console_project/jwtConsole.js')
 const signingViaEmail = require('./lib/eSignature/examples/signingViaEmail');
 
+const port = process.env.PORT || 3000;
+
 const app = new Koa();
 var router = new Router();
 
@@ -40,6 +42,6 @@ router.post('/submit', async (ctx) => {
 app.use(router.routes())
 .use(router.allowedMethods());
 
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
