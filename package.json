@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "relocate": "[ ! -d 'node_modules' ] || (rm -rf ../node_modules && mv -f node_modules ../)",
     "relocate_windows": "(if exist node_modules/ (cd ../ && remove-node-modules && move jwt_console_project/node_modules ./))",
-    "start": "(npm run relocate --silent || npm run relocate_windows --silent) && node jwtConsole.js"
+    "start": "node index.js"
   },
   "author": "DocuSign, Inc",
   "license": "ISC",

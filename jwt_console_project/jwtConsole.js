@@ -36,7 +36,7 @@ async function authenticate(){
   const jwtLifeSec = 10 * 60, // requested lifetime for the JWT is 10 min
     dsApi = new docusign.ApiClient();
   dsApi.setOAuthBasePath(jwtConfig.dsOauthServer.replace('https://', '')); // it should be domain only.
-  let rsaKey = fs.readFileSync(jwtConfig.privateKeyLocation);
+  let rsaKey = process.env.privateKey || fs.readFileSync(jwtConfig.privateKeyLocation);
 
   try {
     const results = await dsApi.requestJWTUserToken(jwtConfig.dsJWTClientId,
